@@ -11,42 +11,18 @@ namespace DatagramTest
 {
     class Program
     {
-        static StreamReader datagramText;
-        static string schemaText;
+        static Datagram data;
 
-        static void Main(string[] args)
+        static void Main()
         {
-            ReadInputs();
-
-            try
+            using (StreamReader datagramReader = new StreamReader(@"..\..\TestDatagram.xml"))
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(Datagram));
-                object obj = serializer.Deserialize(datagramText);
-                Datagram data = (Datagram)obj;
-                Console.WriteLine("Woohoo!");
+                data = (Datagram)serializer.Deserialize(datagramReader);
             }
-            catch(Exception e)
-            {
-                Console.WriteLine("Error converting: " + e.Message);
-            }
-            finally
-            {
-                datagramText.Close();
-            }
+
+            Console.WriteLine("Woohoo!");
         }
   
-        static void ReadInputs()
-        {
-            try
-            {
-                //               datagramText = new StreamReader(@"..\..\Datagramv1.1.xml");
-                datagramText = new StreamReader(@"..\..\TestDatagram.xml");
-                schemaText = File.ReadAllText(@"..\..\datagramv1.1corrected.xsd");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error reading files " + e.Message);
-            }
-        }
     }
 }
