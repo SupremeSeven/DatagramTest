@@ -15,13 +15,24 @@ namespace DatagramTest
 
         static void Main()
         {
-            using (StreamReader datagramReader = new StreamReader(@"..\..\TestDatagram.xml"))
+            using (StreamReader datagramReader = new StreamReader(@"..\..\Datagramv1.1.xml"))
+//           using (StreamReader datagramReader = new StreamReader(@"..\..\TestDatagram.xml"))
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(Datagram));
                 data = (Datagram)serializer.Deserialize(datagramReader);
             }
 
             Console.WriteLine("Woohoo!");
+
+            PrintData();
+        }
+
+        static void PrintData()
+        {
+            Console.WriteLine($"{data.Id}");
+            Console.WriteLine($"{data.Timestamp}");
+            Console.WriteLine($"{data.Transaction.Customer}");
+            Console.WriteLine($"{data.Transaction.Order}");
         }
   
     }
