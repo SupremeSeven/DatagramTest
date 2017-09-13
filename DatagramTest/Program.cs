@@ -29,7 +29,7 @@ namespace DatagramTest
 
             GenericEntity<DatagramTransactionOrderAssembly> SQLtest = new GenericEntity<DatagramTransactionOrderAssembly>(data.Transaction.Order.Assembly[0]);
 
-            string query = SQLtest.Insert();
+            string query = SQLtest.InsertString();
             Console.WriteLine(query);
         }
 

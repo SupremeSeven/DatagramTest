@@ -15,34 +15,32 @@ namespace DatagramTest
         {
             this.obj = obj;
         }
-        public string Insert()
+        public string InsertString()
         {
-            StringBuilder sb = new StringBuilder();
-            int ctr = 0;
+            StringBuilder insertValues = new StringBuilder();
+            StringBuilder columnNames = new StringBuilder();
 
             Type type = typeof(T);
-            StringBuilder sbQry = new StringBuilder();
-
-
             PropertyInfo[] propInfo = type.GetProperties();
-            foreach (PropertyInfo pi in propInfo)
+
+            foreach (PropertyInfo property in propInfo)
             {
-                if (sbQry.ToString() == string.Empty)
-                    sbQry.AppendFormat("INSERT INTO {0} ({1}",
-                       type.Name.Replace("Entity", string.Empty), pi.Name);
+                if (columnNames.ToString() == string.Empty)
+                    columnNames.AppendFormat("INSERT INTO {0} ({1}",
+                       type.Name, property.Name);
                 else
                 {
-                    sbQry.AppendFormat(", {0}", pi.Name);
-                    sb.Append(",");
+                    columnNames.AppendFormat(", {0}", property.Name);
+                    insertValues.Append(",");
                 }
-                sb.Append("{" + ctr++ + "}");
-                Console.WriteLine(pi.GetValue(obj));
+                insertValues.Append("{" + '@' + property.Name + "}");
+                Console.WriteLine(property.GetValue(obj));
             }
 
-            if (sbQry.ToString() != string.Empty)
-                sbQry.AppendFormat(") VALUES({0})", sb.ToString());
+            if (columnNames.ToString() != string.Empty)
+                columnNames.AppendFormat(") VALUES({0})", insertValues.ToString());
 
-            return sbQry.ToString();
+            return columnNames.ToString();
         }
     }
 }
