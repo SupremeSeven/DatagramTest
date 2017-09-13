@@ -45,7 +45,7 @@ namespace DatagramTest
                     columnNames.AppendFormat($", {property.Name}");
                     insertValues.Append(", ");
                 }
-                insertValues.Append("{" + '@' + property.Name + "}");
+                insertValues.Append($"@{property.Name}");
             }
 
             if (columnNames.ToString() != string.Empty)

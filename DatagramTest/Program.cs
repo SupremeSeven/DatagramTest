@@ -31,7 +31,7 @@ namespace DatagramTest
 
             string query = SQLtest.InsertString();
             Console.WriteLine(query);
-            SQLtest.InsertDatabase();
+            //SQLtest.InsertDatabase();
         }
 
         static void PrintData()
