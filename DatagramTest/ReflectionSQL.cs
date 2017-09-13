@@ -65,20 +65,61 @@ namespace DatagramTest
                 {
                     connection.Open();
 
-                    PropertyInfo[] propInfo = type.GetProperties();
+                    //PropertyInfo[] propInfo = type.GetProperties();
 
-                    foreach (PropertyInfo property in propInfo)
-                    {
-                        cmd.Parameters.Add($"@{property.Name}");
-                        cmd.Parameters[$"@{property.Name}"].Value = property.GetValue(obj);
-                    }
-                    cmd.ExecuteNonQuery();
+                    //foreach (PropertyInfo property in propInfo)
+                    //{
+                    //    cmd.Parameters.Add($"@{property.Name}");
+                    //    cmd.Parameters[$"@{property.Name}"].Value = property.GetValue(obj);
+                    //}
+                    //cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = "SELECT[TABLE_NAME],[COLUMN_NAME],[DATA_TYPE] FROM[TLGPizza].[INFORMATION_SCHEMA].[COLUMNS];";
+
+                    var test = cmd.ExecuteNonQuery();
+
+                    Console.WriteLine(test);
+
                     connection.Close();
                 }
             }
         }
     }
 }
+
+    //    public void GetDatabaseSchema()
+    //    {
+    //        using (SqlConnection connection = new SqlConnection(connectionString))
+    //        {
+    //            connection.Open();
+    //            DataTable table = connection.GetSchema("Columns");
+
+    //            // Display the contents of the table.  
+    //            DisplayData(table);
+    //            //Console.WriteLine(table.Columns.GetType());
+                
+    //            Console.WriteLine("Press any key to continue.");
+    //            Console.ReadKey();
+
+                
+    //            connection.Close();
+    //        }
+    //    }
+
+    //    private static void DisplayData(System.Data.DataTable table)
+    //    {
+    //        foreach (System.Data.DataRow row in table.Rows)
+    //        {
+    //            foreach (System.Data.DataColumn col in table.Columns)
+    //            {
+    //                Console.WriteLine("{0} = {1}", col.ColumnName, row[col]);
+    //                //Console.WriteLine($"{col.ColumnName} = {col.DefaultValue}");
+    //            }
+    //            Console.WriteLine("============================");
+    //        }
+    //    }
+    //}
+
 
 
 
