@@ -42,14 +42,14 @@ namespace DatagramTest
                     columnNames.AppendFormat($"INSERT INTO [TLGPizza].[{tableDict[type.Name]}] ({property.Name}");
                 else
                 {
-                    columnNames.AppendFormat(", {0}", property.Name);
-                    insertValues.Append(",");
+                    columnNames.AppendFormat($", {property.Name}");
+                    insertValues.Append(", ");
                 }
-                insertValues.Append("{" + '@' + property.Name + "}");
+                insertValues.Append($"@{property.Name}");
             }
 
             if (columnNames.ToString() != string.Empty)
-                columnNames.AppendFormat(") VALUES({0})", insertValues.ToString());
+                columnNames.AppendFormat($") VALUES({insertValues.ToString()});");
 
             return columnNames.ToString();
         }
@@ -69,10 +69,11 @@ namespace DatagramTest
 
                     foreach (PropertyInfo property in propInfo)
                     {
-                        cmd.Parameters.Add('@' + property.Name);
-                        cmd.Parameters['@' + property.Name].Value = property.GetValue(obj);
+                        cmd.Parameters.Add($"@{property.Name}");
+                        cmd.Parameters[$"@{property.Name}"].Value = property.GetValue(obj);
                     }
                     cmd.ExecuteNonQuery();
+                    connection.Close();
                 }
             }
         }
