@@ -16,7 +16,7 @@ namespace DatagramTest
 
         static void Main()
         {
-//            using (StreamReader datagramReader = new StreamReader(@"..\..\Datagramv1.1.xml"))
+            //            using (StreamReader datagramReader = new StreamReader(@"..\..\Datagramv1.1.xml"))
             using (StreamReader datagramReader = new StreamReader(@"..\..\TestDatagram.xml"))
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(Datagram));
@@ -25,7 +25,7 @@ namespace DatagramTest
 
             Console.WriteLine("Woohoo!");
 
-//            PrintProperties(data);
+            //            PrintProperties(data);
 
             GenericEntity<DatagramTransactionOrderAssembly> SQLtest = new GenericEntity<DatagramTransactionOrderAssembly>(data.Transaction.Order.Assembly[0]);
 
