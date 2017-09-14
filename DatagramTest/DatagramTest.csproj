@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Datagram.cs" />
+    <Compile Include="DatagramPartial.cs" />
     <Compile Include="DatagramTransactionOrderAssembly.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
